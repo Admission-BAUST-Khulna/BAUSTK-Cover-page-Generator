@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BAUST Khulna Cover Page Studio</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Merriweather:wght@300;400;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        baust: {
+                            navy: '#004d26',
+                            green: '#006633',
+                            gold: '#D4AF37',
+                            dark: '#0f172a'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        times: ['"Times New Roman"', 'Times', 'serif'],
+                        arial: ['Arial', 'Helvetica', 'sans-serif'],
+                        garamond: ['Garamond', 'Georgia', 'serif'],
+                        merriweather: ['Merriweather', 'serif'],
+                        cinzel: ['Cinzel', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Exact A4 Print Dimensions */
+        .a4-page {
+            width: 210mm;
+            min-height: 297mm;
+            height: 297mm;
+            padding: 15mm 18mm;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.15), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            position: relative;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow: hidden;
+            transition: all 0.2s ease-in-out;
+        }
+
+        /* Color Theme Dynamic Overrides */
+        .theme-accent-color { color: var(--theme-primary, #004d26); }
+        .theme-accent-bg { background-color: var(--theme-primary, #004d26); }
+        .theme-accent-border { border-color: var(--theme-primary, #004d26); }
+
+        /* Font Family Dynamic Override */
+        .dynamic-font { font-family: var(--theme-font, 'Times New Roman', serif); }
+
+        /* Border Styles */
+        .border-style-double { border: 4px double var(--theme-primary, #004d26); }
+        .border-style-solid { border: 1.5px solid var(--theme-primary, #004d26); }
+        .border-style-thin { border: 1px solid #cbd5e1; }
+        .border-style-none { border: none !important; }
+
+        /* Mobile Preview Scroll */
+        @media (max-width: 1280px) {
+            .preview-container {
+                overflow-x: auto;
+                padding-bottom: 1rem;
+            }
+        }
+
+        /* PRINT STYLES */
+        @media print {
+            body {
+                background: white !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            .no-print {
+                display: none !important;
+            }
+
+            .preview-container {
+                padding: 0 !important;
+                overflow: visible !important;
+            }
+
+            .a4-page {
+                width: 210mm !important;
+                height: 297mm !important;
+                min-height: 297mm !important;
+                max-height: 297mm !important;
+                padding: 15mm 18mm !important;
+                margin: 0 !important;
+                box-shadow: none !important;
+                border-radius: 0 !important;
+                page-break-after: always;
+                page-break-inside: avoid;
+            }
+
+            @page {
+                size: A4 portrait;
+                margin: 0;
+            }
+        }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-100 font-sans min-h-screen flex flex-col antialiased" style="--theme-primary: #004d26; --theme-font: 'Times New Roman', serif;">
+
+    <!-- Top Navigation Bar -->
+    <header class="bg-slate-950/80 backdrop-blur-md border-b border-slate-800 sticky top-0 z-50 no-print">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-emerald-700 to-emerald-500 p-0.5 shadow-lg shadow-emerald-900/30">
+                    <div class="w-full h-full bg-slate-950 rounded-[10px] flex items-center justify-center">
+                        <i class="fa-solid fa-graduation-cap text-emerald-400 text-lg"></i>
+                    </div>
+                </div>
+                <div>
+                    <h1 class="text-base sm:text-lg font-bold text-white tracking-wide">BAUST Khulna Cover Studio</h1>
+                    <p class="text-xs text-emerald-400 font-medium hidden sm:block">Bangladesh Army University of Science and Technology, Khulna</p>
+                </div>
+            </div>
+
+            <div class="flex items-center space-x-3">
+                <button onclick="loadSampleData()" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold rounded-lg border border-slate-700 transition">
+                    <i class="fa-solid fa-wand-magic-sparkles mr-1 text-emerald-400"></i> Sample Data
+                </button>
+                <button onclick="window.print()" class="px-4 py-2 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-semibold rounded-lg text-sm shadow-lg shadow-emerald-900/40 transition flex items-center space-x-2">
+                    <i class="fa-solid fa-file-pdf"></i>
+                    <span>Print / Save PDF</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Workspace -->
+    <main class="flex-grow max-w-[1600px] w-full mx-auto p-4 lg:p-6 grid grid-cols-1 xl:grid-cols-12 gap-6">
+
+        <!-- CONTROLS PANEL (Left Side) -->
+        <aside class="xl:col-span-5 bg-slate-950/60 border border-slate-800 rounded-2xl p-5 no-print space-y-6 h-fit backdrop-blur-sm">
+            
+            <!-- Template Selector Buttons -->
+            <div>
+                <label class="block text-xs font-bold uppercase tracking-wider text-emerald-400 mb-2">
+                    <i class="fa-solid fa-layer-group mr-1"></i> Select Popular Template
+                </label>
+                <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 text-xs">
+                    <button onclick="setTemplate('classic')" id="btn-classic" class="p-2.5 rounded-xl border border-emerald-500/50 bg-emerald-950/40 text-white font-medium flex flex-col items-center gap-1.5 transition">
+                        <i class="fa-solid fa-graduation-cap text-base text-emerald-400"></i>
+                        <span>1. Classic Formal</span>
+                    </button>
+                    <button onclick="setTemplate('modern')" id="btn-modern" class="p-2.5 rounded-xl border border-slate-800 bg-slate-900 text-slate-400 font-medium flex flex-col items-center gap-1.5 hover:border-slate-700 transition">
+                        <i class="fa-solid fa-grip-lines text-base text-teal-400"></i>
+                        <span>2. Minimal Clean</span>
+                    </button>
+                    <button onclick="setTemplate('executive')" id="btn-executive" class="p-2.5 rounded-xl border border-slate-800 bg-slate-900 text-slate-400 font-medium flex flex-col items-center gap-1.5 hover:border-slate-700 transition">
+                        <i class="fa-solid fa-shield-halved text-base text-amber-400"></i>
+                        <span>3. Army Banner</span>
+                    </button>
+                    <button onclick="setTemplate('sidebar')" id="btn-sidebar" class="p-2.5 rounded-xl border border-slate-800 bg-slate-900 text-slate-400 font-medium flex flex-col items-center gap-1.5 hover:border-slate-700 transition">
+                        <i class="fa-solid fa-table-columns text-base text-blue-400"></i>
+                        <span>4. Vertical Line</span>
+                    </button>
+                    <button onclick="setTemplate('boxed')" id="btn-boxed" class="p-2.5 rounded-xl border border-slate-800 bg-slate-900 text-slate-400 font-medium flex flex-col items-center gap-1.5 hover:border-slate-700 transition">
+                        <i class="fa-solid fa-vector-square text-base text-purple-400"></i>
+                        <span>5. Boxed Grid</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Customization Controls (Colors, Fonts, Borders, Logo) -->
+            <div class="bg-slate-900/80 p-4 rounded-xl border border-slate-800/80 space-y-4 text-xs">
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                    
+                    <!-- Theme Color -->
+                    <div>
+                        <label class="block font-semibold text-slate-300 mb-1">Accent Color</label>
+                        <select id="colorSelect" onchange="changeColor(this.value)" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2 text-slate-200 focus:outline-none">
+                            <option value="#004d26">Army Green</option>
+                            <option value="#0A2540">Navy Blue</option>
+                            <option value="#111111">Classic Black</option>
+                            <option value="#5C061C">Burgundy</option>
+                            <option value="#B8860B">Dark Gold</option>
+                        </select>
+                    </div>
+
+                    <!-- Typography -->
+                    <div>
+                        <label class="block font-semibold text-slate-300 mb-1">Font Style</label>
+                        <select id="fontSelect" onchange="changeFont(this.value)" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2 text-slate-200 focus:outline-none">
+                            <option value="'Times New Roman', serif">Times New Roman</option>
+                            <option value="Arial, sans-serif">Arial / Clean</option>
+                            <option value="Garamond, serif">Garamond</option>
+                            <option value="'Merriweather', serif">Merriweather</option>
+                        </select>
+                    </div>
+
+                    <!-- Border Style -->
+                    <div>
+                        <label class="block font-semibold text-slate-300 mb-1">Page Border</label>
+                        <select id="borderSelect" onchange="changeBorder(this.value)" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2 text-slate-200 focus:outline-none">
+                            <option value="border-style-double">Double Border</option>
+                            <option value="border-style-solid">Solid Line</option>
+                            <option value="border-style-thin">Thin Line</option>
+                            <option value="border-style-none">No Border</option>
+                        </select>
+                    </div>
+
+                    <!-- Logo Height -->
+                    <div>
+                        <label class="block font-semibold text-slate-300 mb-1">Logo Size</label>
+                        <select id="logoSizeSelect" onchange="changeLogoSize(this.value)" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2 text-slate-200 focus:outline-none">
+                            <option value="h-28">Medium (Standard)</option>
+                            <option value="h-20">Small</option>
+                            <option value="h-36">Large</option>
+                        </select>
+                    </div>
+
+                </div>
+
+                <!-- Custom Logo Upload Option -->
+                <div class="flex items-center justify-between pt-1 border-t border-slate-800">
+                    <span class="text-slate-400">Custom Logo (Optional):</span>
+                    <label class="cursor-pointer bg-slate-800 hover:bg-slate-700 text-xs px-3 py-1.5 rounded-lg border border-slate-700 text-slate-200 font-medium">
+                        <i class="fa-solid fa-upload mr-1"></i> Upload Image
+                        <input type="file" accept="image/*" onchange="uploadLogo(event)" class="hidden">
+                    </label>
+                </div>
+            </div>
+
+            <!-- Form Content Data Inputs -->
+            <form id="coverForm" class="space-y-4 text-xs" onsubmit="event.preventDefault();">
+
+                <!-- Type Selector -->
+                <div class="grid grid-cols-2 gap-3">
+                    <label class="flex items-center justify-center p-2.5 rounded-xl border border-slate-800 bg-slate-900 cursor-pointer has-[:checked]:border-emerald-500 has-[:checked]:bg-emerald-950/40 text-slate-300 font-medium transition">
+                        <input type="radio" name="docType" value="Assignment" checked onchange="render()" class="sr-only">
+                        <i class="fa-solid fa-book-open mr-2 text-emerald-400"></i> Assignment
+                    </label>
+                    <label class="flex items-center justify-center p-2.5 rounded-xl border border-slate-800 bg-slate-900 cursor-pointer has-[:checked]:border-emerald-500 has-[:checked]:bg-emerald-950/40 text-slate-300 font-medium transition">
+                        <input type="radio" name="docType" value="Lab Report" onchange="render()" class="sr-only">
+                        <i class="fa-solid fa-flask mr-2 text-teal-400"></i> Lab Report
+                    </label>
+                </div>
+
+                <!-- Topic & Course Details -->
+                <div class="space-y-3 bg-slate-900/50 p-3.5 rounded-xl border border-slate-800/80">
+                    <div>
+                        <label class="block text-slate-400 font-medium mb-1">Topic / Experiment Name</label>
+                        <input type="text" id="topicTitle" value="Design & Implementation of Web Based Applications" oninput="render()" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2 text-slate-100 focus:border-emerald-500 focus:outline-none">
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-slate-400 font-medium mb-1">Course Code</label>
+                            <input type="text" id="courseCode" value="CSE 3100" oninput="render()" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2 text-slate-100 focus:border-emerald-500 focus:outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-slate-400 font-medium mb-1">Course Title</label>
+                            <input type="text" id="courseTitle" value="Software Engineering Project" oninput="render()" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2 text-slate-100 focus:border-emerald-500 focus:outline-none">
+                        </div>
+                    </div>
+
+                    <!-- Extra Lab Report Fields -->
+                    <div id="labFields" class="grid grid-cols-2 gap-3 pt-1 border-t border-slate-800 hidden">
+                        <div>
+                            <label class="block text-slate-400 font-medium mb-1">Experiment No.</label>
+                            <input type="text" id="expNo" value="01" oninput="render()" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2 text-slate-100 focus:border-emerald-500 focus:outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-slate-400 font-medium mb-1">Performance Date</label>
+                            <input type="date" id="perfDate" onchange="render()" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2 text-slate-100 focus:border-emerald-500 focus:outline-none">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-slate-400 font-medium mb-1">Department</label>
+                        <select id="department" onchange="render()" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2 text-slate-100 focus:border-emerald-500 focus:outline-none">
+                            <option value="Computer Science & Engineering">Computer Science & Engineering (CSE)</option>
+                            <option value="Electrical & Electronic Engineering">Electrical & Electronic Engineering (EEE)</option>
+                            <option value="Mechanical Engineering">Mechanical Engineering (ME)</option>
+                            <option value="Civil Engineering">Civil Engineering (CE)</option>
+                            <option value="Business Administration">Business Administration (BBA)</option>
+                            <option value="English">English</option>
+                            <option value="Arts & Sciences">Arts & Sciences (Physics/Math/Chem)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Teacher Info -->
+                <div class="bg-slate-900/50 p-3.5 rounded-xl border border-slate-800/80 space-y-3">
+                    <span class="block font-bold text-slate-300 uppercase tracking-wider text-[10px]">Submitted To (Teacher)</span>
+                    <div>
+                        <input type="text" id="teacherName" placeholder="Teacher Name" value="Dr. Md. Ahsan Habib" oninput="render()" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2 text-slate-100 focus:border-emerald-500 focus:outline-none">
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <input type="text" id="teacherDesignation" placeholder="Designation" value="Associate Professor" oninput="render()" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2 text-slate-100 focus:border-emerald-500 focus:outline-none">
+                        <input type="text" id="teacherDept" placeholder="Dept." value="Dept. of CSE" oninput="render()" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2 text-slate-100 focus:border-emerald-500 focus:outline-none">
+                    </div>
+                </div>
+
+                <!-- Student Info / Multi-Student Support -->
+                <div class="bg-slate-900/50 p-3.5 rounded-xl border border-slate-800/80 space-y-3">
+                    <div class="flex items-center justify-between">
+                        <span class="block font-bold text-slate-300 uppercase tracking-wider text-[10px]">Submitted By (Student)</span>
+                        <button type="button" onclick="addStudent()" class="text-xs text-emerald-400 hover:underline flex items-center gap-1 font-semibold">
+                            <i class="fa-solid fa-user-plus"></i> Add Group Member
+                        </button>
+                    </div>
+
+                    <div id="studentsList" class="space-y-2">
+                        <!-- Student input cards dynamically generated -->
+                    </div>
+                </div>
+
+                <!-- Submission Date -->
+                <div>
+                    <label class="block text-slate-400 font-medium mb-1">Submission Date</label>
+                    <input type="date" id="submissionDate" onchange="render()" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2 text-slate-100 focus:border-emerald-500 focus:outline-none">
+                </div>
+
+            </form>
+
+        </aside>
+
+        <!-- LIVE PREVIEW AREA (Right Side) -->
+        <section class="xl:col-span-7 flex justify-center preview-container items-start">
+            
+            <!-- Standard A4 Sheet Document -->
+            <div id="a4Paper" class="a4-page dynamic-font border-style-double">
+                <!-- Template HTML content gets dynamically injected here -->
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- JavaScript Application Logic -->
+    <script>
+        // State Management
+        let currentTemplate = 'classic';
+        let logoSrc = 'baust-logo.png'; // Direct uploaded official logo reference
+        let studentData = [
+            { name: 'Md. Tanvir Ahmed', id: '210101001', batch: '11th Batch', sec: 'A' }
+        ];
+
+        // Default Initialize
+        window.addEventListener('DOMContentLoaded', () => {
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('submissionDate').value = today;
+            document.getElementById('perfDate').value = today;
+            renderStudentsForm();
+            render();
+        });
+
+        // Load Sample Preset Data
+        function loadSampleData() {
+            document.getElementById('topicTitle').value = 'Design & Implementation of Web Based Applications';
+            document.getElementById('courseCode').value = 'CSE 3100';
+            document.getElementById('courseTitle').value = 'Software Engineering Project';
+            document.getElementById('teacherName').value = 'Dr. Md. Ahsan Habib';
+            document.getElementById('teacherDesignation').value = 'Associate Professor';
+            document.getElementById('teacherDept').value = 'Dept. of CSE';
+            
+            studentData = [
+                { name: 'Md. Tanvir Ahmed', id: '210101001', batch: '11th Batch', sec: 'A' },
+                { name: 'Sumiya Rahman', id: '210101025', batch: '11th Batch', sec: 'A' }
+            ];
+            renderStudentsForm();
+            render();
+        }
+
+        // Student Form Handlers
+        function renderStudentsForm() {
+            const list = document.getElementById('studentsList');
+            list.innerHTML = '';
+            studentData.forEach((st, idx) => {
+                const card = document.createElement('div');
+                card.className = 'grid grid-cols-12 gap-1.5 items-center bg-slate-950 p-2 rounded-lg border border-slate-800';
+                card.innerHTML = `
+                    <div class="col-span-4"><input type="text" placeholder="Name" value="${st.name}" oninput="updateStudent(${idx}, 'name', this.value)" class="w-full bg-slate-900 border border-slate-800 rounded p-1 text-slate-100 text-xs"></div>
+                    <div class="col-span-3"><input type="text" placeholder="ID" value="${st.id}" oninput="updateStudent(${idx}, 'id', this.value)" class="w-full bg-slate-900 border border-slate-800 rounded p-1 text-slate-100 text-xs"></div>
+                    <div class="col-span-2"><input type="text" placeholder="Batch" value="${st.batch}" oninput="updateStudent(${idx}, 'batch', this.value)" class="w-full bg-slate-900 border border-slate-800 rounded p-1 text-slate-100 text-xs"></div>
+                    <div class="col-span-2"><input type="text" placeholder="Sec" value="${st.sec}" oninput="updateStudent(${idx}, 'sec', this.value)" class="w-full bg-slate-900 border border-slate-800 rounded p-1 text-slate-100 text-xs"></div>
+                    <div class="col-span-1 text-right">
+                        ${studentData.length > 1 ? `<button type="button" onclick="removeStudent(${idx})" class="text-rose-400 hover:text-rose-300 p-1"><i class="fa-solid fa-xmark"></i></button>` : ''}
+                    </div>
+                `;
+                list.appendChild(card);
+            });
+        }
+
+        function addStudent() {
+            studentData.push({ name: '', id: '', batch: '11th Batch', sec: 'A' });
+            renderStudentsForm();
+            render();
+        }
+
+        function removeStudent(idx) {
+            studentData.splice(idx, 1);
+            renderStudentsForm();
+            render();
+        }
+
+        function updateStudent(idx, key, val) {
+            studentData[idx][key] = val;
+            render();
+        }
+
+        // Customization Functions
+        function changeColor(colorHex) {
+            document.body.style.setProperty('--theme-primary', colorHex);
+            render();
+        }
+
+        function changeFont(fontFamily) {
+            document.body.style.setProperty('--theme-font', fontFamily);
+        }
+
+        function changeBorder(borderClass) {
+            const paper = document.getElementById('a4Paper');
+            paper.className = `a4-page dynamic-font ${borderClass}`;
+        }
+
+        function changeLogoSize(sizeClass) {
+            const logos = document.querySelectorAll('.page-logo');
+            logos.forEach(l => l.className = `page-logo ${sizeClass} object-contain mx-auto`);
+        }
+
+        function uploadLogo(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(evt) {
+                    logoSrc = evt.target.result;
+                    render();
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function setTemplate(tpl) {
+            currentTemplate = tpl;
+            ['classic', 'modern', 'executive', 'sidebar', 'boxed'].forEach(t => {
+                const btn = document.getElementById(`btn-${t}`);
+                if (btn) {
+                    if (t === tpl) {
+                        btn.className = 'p-2.5 rounded-xl border border-emerald-500/50 bg-emerald-950/40 text-white font-medium flex flex-col items-center gap-1.5 transition';
+                    } else {
+                        btn.className = 'p-2.5 rounded-xl border border-slate-800 bg-slate-900 text-slate-400 font-medium flex flex-col items-center gap-1.5 hover:border-slate-700 transition';
+                    }
+                }
+            });
+            render();
+        }
+
+        // Format Date nicely
+        function formatDate(dStr) {
+            if (!dStr) return 'N/A';
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            return new Date(dStr).toLocaleDateString('en-US', options);
+        }
+
+        // Main Render Function
+        function render() {
+            const docType = document.querySelector('input[name="docType"]:checked').value;
+            const topic = document.getElementById('topicTitle').value || 'Topic Title Here';
+            const code = document.getElementById('courseCode').value || 'N/A';
+            const title = document.getElementById('courseTitle').value || 'N/A';
+            const dept = document.getElementById('department').value;
+            const teacherName = document.getElementById('teacherName').value || 'Teacher Name';
+            const teacherDesig = document.getElementById('teacherDesignation').value || 'Designation';
+            const teacherDept = document.getElementById('teacherDept').value || 'Dept.';
+            const subDate = formatDate(document.getElementById('submissionDate').value);
+
+            const isLab = docType === 'Lab Report';
+            document.getElementById('labFields').classList.toggle('hidden', !isLab);
+            const expNo = document.getElementById('expNo').value || '01';
+            const perfDate = formatDate(document.getElementById('perfDate').value);
+
+            const logoSize = document.getElementById('logoSizeSelect').value;
+
+            const paper = document.getElementById('a4Paper');
+
+            // Render Students HTML Block
+            let studentsHTML = '';
+            if (studentData.length === 1) {
+                const s = studentData[0];
+                studentsHTML = `
+                    <p class="font-bold text-sm text-slate-900 mb-0.5">${s.name || 'Student Name'}</p>
+                    <p class="text-xs text-slate-700"><strong>ID:</strong> ${s.id || 'N/A'}</p>
+                    <p class="text-xs text-slate-700"><strong>Batch:</strong> ${s.batch || 'N/A'}</p>
+                    <p class="text-xs text-slate-700"><strong>Section:</strong> ${s.sec || 'N/A'}</p>
+                    <p class="text-xs text-slate-700">Dept. of ${dept}</p>
+                `;
+            } else {
+                studentsHTML = `<div class="space-y-1.5">`;
+                studentData.forEach(s => {
+                    studentsHTML += `
+                        <div class="text-xs border-b border-slate-200 pb-1">
+                            <p class="font-bold text-slate-900">${s.name || 'Student Name'}</p>
+                            <p class="text-slate-600">ID: ${s.id || 'N/A'} | Batch: ${s.batch || ''} (${s.sec || ''})</p>
+                        </div>
+                    `;
+                });
+                studentsHTML += `</div>`;
+            }
+
+            // TEMPLATE 1: CLASSIC FORMAL
+            if (currentTemplate === 'classic') {
+                paper.innerHTML = `
+                    <div class="h-full flex flex-col justify-between items-center text-center">
+                        <div class="w-full">
+                            <h1 class="font-cinzel text-xl font-bold tracking-wider uppercase theme-accent-color mb-1">
+                                Bangladesh Army University of Science & Technology
+                            </h1>
+                            <p class="text-xs font-bold tracking-widest text-slate-600 uppercase mb-1">
+                                Shiromoni, Khulna
+                            </p>
+                            <p class="text-xs font-semibold text-slate-700 tracking-wide uppercase">
+                                Department of ${dept}
+                            </p>
+
+                            <div class="my-6">
+                                <img src="${logoSrc}" alt="BAUST Crest" class="page-logo ${logoSize} object-contain mx-auto" onerror="this.onerror=null; this.src='https://placehold.co/120x120/004d26/ffffff?text=BAUST';">
+                            </div>
+
+                            <div class="w-full border-t-2 border-b-2 theme-accent-border py-4 my-2">
+                                <span class="text-xs font-bold tracking-widest uppercase theme-accent-color block mb-1">
+                                    ${docType}
+                                </span>
+                                <span class="text-[10px] text-slate-500 block uppercase tracking-widest mb-1">ON</span>
+                                <h2 class="text-lg font-bold text-slate-900 leading-snug px-4">
+                                    ${topic}
+                                </h2>
+                            </div>
+
+                            <div class="mt-4 space-y-1 text-xs sm:text-sm">
+                                <p><span class="font-bold">Course Code:</span> ${code}</p>
+                                <p><span class="font-bold">Course Title:</span> ${title}</p>
+                                ${isLab ? `<p><span class="font-bold">Experiment No:</span> ${expNo}</p>` : ''}
+                            </div>
+                        </div>
+
+                        <div class="w-full my-auto pt-4">
+                            <div class="grid grid-cols-2 gap-6 text-left border-t border-slate-300 pt-6">
+                                <div>
+                                    <h3 class="text-xs font-bold uppercase tracking-wider theme-accent-color border-b border-slate-300 pb-1 mb-2">
+                                        Submitted To:
+                                    </h3>
+                                    <p class="font-bold text-sm text-slate-900">${teacherName}</p>
+                                    <p class="text-xs text-slate-700">${teacherDesig}</p>
+                                    <p class="text-xs text-slate-700">${teacherDept}</p>
+                                    <p class="text-xs text-slate-700">BAUST, Khulna</p>
+                                </div>
+
+                                <div class="border-l border-slate-200 pl-4">
+                                    <h3 class="text-xs font-bold uppercase tracking-wider theme-accent-color border-b border-slate-300 pb-1 mb-2">
+                                        Submitted By:
+                                    </h3>
+                                    ${studentsHTML}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="w-full pt-4 border-t border-slate-200 text-xs text-slate-800 flex justify-between">
+                            ${isLab ? `<p><span class="font-bold">Date of Performance:</span> ${perfDate}</p>` : '<div></div>'}
+                            <p><span class="font-bold">Date of Submission:</span> ${subDate}</p>
+                        </div>
+                    </div>
+                `;
+            }
+
+            // TEMPLATE 2: MODERN MINIMALIST
+            else if (currentTemplate === 'modern') {
+                paper.innerHTML = `
+                    <div class="h-full flex flex-col justify-between text-left">
+                        <div>
+                            <div class="flex items-center justify-between border-b-2 theme-accent-border pb-4 mb-6">
+                                <div>
+                                    <h1 class="font-cinzel text-lg font-bold uppercase theme-accent-color leading-tight">
+                                        Bangladesh Army University<br>of Science & Technology
+                                    </h1>
+                                    <p class="text-xs text-slate-500 uppercase tracking-widest mt-1">Khulna Campus</p>
+                                </div>
+                                <img src="${logoSrc}" alt="BAUST Logo" class="page-logo ${logoSize} object-contain" onerror="this.onerror=null; this.src='https://placehold.co/100x100/004d26/ffffff?text=BAUST';">
+                            </div>
+
+                            <div class="my-8">
+                                <span class="px-2.5 py-1 theme-accent-bg text-white text-[10px] font-bold uppercase tracking-widest rounded-sm">
+                                    ${docType}
+                                </span>
+                                <h2 class="text-2xl font-bold text-slate-900 mt-3 leading-tight">
+                                    ${topic}
+                                </h2>
+                                <div class="mt-4 pt-3 border-t border-slate-200 text-xs text-slate-600 flex gap-6">
+                                    <p><strong class="text-slate-900">Code:</strong> ${code}</p>
+                                    <p><strong class="text-slate-900">Title:</strong> ${title}</p>
+                                    ${isLab ? `<p><strong class="text-slate-900">Exp:</strong> #${expNo}</p>` : ''}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-8 my-auto bg-slate-50 p-6 rounded-lg border border-slate-200">
+                            <div>
+                                <p class="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-2">SUPERVISOR</p>
+                                <p class="font-bold text-sm text-slate-900">${teacherName}</p>
+                                <p class="text-xs text-slate-600">${teacherDesig}</p>
+                                <p class="text-xs text-slate-600">${teacherDept}</p>
+                            </div>
+                            <div>
+                                <p class="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-2">STUDENT DETAILS</p>
+                                ${studentsHTML}
+                            </div>
+                        </div>
+
+                        <div class="flex justify-between items-center text-xs text-slate-500 pt-4 border-t border-slate-200">
+                            <p>Dept. of ${dept}</p>
+                            <p><strong>Submission:</strong> ${subDate}</p>
+                        </div>
+                    </div>
+                `;
+            }
+
+            // TEMPLATE 3: EXECUTIVE ARMY BANNER
+            else if (currentTemplate === 'executive') {
+                paper.innerHTML = `
+                    <div class="h-full flex flex-col justify-between items-center text-center">
+                        <div class="w-full">
+                            <div class="theme-accent-bg text-white py-4 -mx-[18mm] -mt-[15mm] px-6 shadow-md">
+                                <h1 class="font-cinzel text-lg font-bold tracking-wider uppercase">
+                                    BANGLADESH ARMY UNIVERSITY OF SCIENCE & TECHNOLOGY
+                                </h1>
+                                <p class="text-xs tracking-widest text-emerald-100 uppercase mt-0.5">KHULNA</p>
+                            </div>
+
+                            <div class="my-6">
+                                <img src="${logoSrc}" alt="BAUST Crest" class="page-logo ${logoSize} object-contain mx-auto" onerror="this.onerror=null; this.src='https://placehold.co/120x120/004d26/ffffff?text=BAUST';">
+                            </div>
+
+                            <p class="text-xs font-bold uppercase text-slate-500 tracking-wider">Department of ${dept}</p>
+
+                            <div class="my-6 px-4">
+                                <span class="text-xs font-bold uppercase tracking-widest text-amber-600 block mb-1">
+                                    [ ${docType} ]
+                                </span>
+                                <h2 class="text-xl font-bold text-slate-900 border-b-2 border-amber-500 pb-3 inline-block">
+                                    ${topic}
+                                </h2>
+                            </div>
+
+                            <div class="text-xs space-y-1 text-slate-700">
+                                <p><strong>Course Code:</strong> ${code} | <strong>Course Title:</strong> ${title}</p>
+                                ${isLab ? `<p><strong>Experiment No:</strong> ${expNo} (${perfDate})</p>` : ''}
+                            </div>
+                        </div>
+
+                        <div class="w-full my-auto">
+                            <div class="grid grid-cols-2 gap-4 text-left border border-slate-300 p-4 rounded-md">
+                                <div class="pr-2">
+                                    <h3 class="text-xs font-bold uppercase theme-accent-color mb-2 border-b pb-1">Submitted To</h3>
+                                    <p class="font-bold text-xs text-slate-900">${teacherName}</p>
+                                    <p class="text-xs text-slate-600">${teacherDesig}</p>
+                                    <p class="text-xs text-slate-600">${teacherDept}</p>
+                                </div>
+                                <div class="pl-2 border-l border-slate-300">
+                                    <h3 class="text-xs font-bold uppercase theme-accent-color mb-2 border-b pb-1">Submitted By</h3>
+                                    ${studentsHTML}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="w-full text-xs text-slate-600 border-t border-slate-200 pt-3">
+                            <p><strong>Date of Submission:</strong> ${subDate}</p>
+                        </div>
+                    </div>
+                `;
+            }
+
+            // TEMPLATE 4: VERTICAL SIDEBAR
+            else if (currentTemplate === 'sidebar') {
+                paper.innerHTML = `
+                    <div class="h-full flex relative">
+                        <!-- Left Accent Bar -->
+                        <div class="w-3 theme-accent-bg h-full absolute -left-[18mm] top-0 bottom-0"></div>
+
+                        <div class="w-full flex flex-col justify-between pl-4">
+                            <div>
+                                <div class="flex items-center justify-between border-b pb-4">
+                                    <div>
+                                        <h1 class="font-cinzel text-base font-bold theme-accent-color uppercase">
+                                            BAUST KHULNA
+                                        </h1>
+                                        <p class="text-xs text-slate-500">Dept. of ${dept}</p>
+                                    </div>
+                                    <img src="${logoSrc}" alt="BAUST Crest" class="page-logo ${logoSize} object-contain" onerror="this.onerror=null; this.src='https://placehold.co/90x90/004d26/ffffff?text=BAUST';">
+                                </div>
+
+                                <div class="my-10">
+                                    <span class="text-xs font-bold uppercase tracking-widest text-slate-400 block mb-1">
+                                        ${docType} REPORT
+                                    </span>
+                                    <h2 class="text-2xl font-bold text-slate-900 mb-4">${topic}</h2>
+                                    <div class="text-xs text-slate-600 space-y-1">
+                                        <p><strong>Course:</strong> ${code} - ${title}</p>
+                                        ${isLab ? `<p><strong>Experiment:</strong> #${expNo}</p>` : ''}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="my-auto space-y-6">
+                                <div class="border-l-2 theme-accent-border pl-4">
+                                    <p class="text-[10px] font-bold text-slate-400 uppercase">INSTRUCTOR</p>
+                                    <p class="font-bold text-sm text-slate-900">${teacherName}</p>
+                                    <p class="text-xs text-slate-600">${teacherDesig}, ${teacherDept}</p>
+                                </div>
+                                <div class="border-l-2 theme-accent-border pl-4">
+                                    <p class="text-[10px] font-bold text-slate-400 uppercase">STUDENT(S)</p>
+                                    ${studentsHTML}
+                                </div>
+                            </div>
+
+                            <div class="border-t pt-3 text-xs text-slate-500 flex justify-between">
+                                <p>Bangladesh Army University of Science & Technology</p>
+                                <p>${subDate}</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            // TEMPLATE 5: BOXED GRID LAYOUT
+            else if (currentTemplate === 'boxed') {
+                paper.innerHTML = `
+                    <div class="h-full flex flex-col justify-between items-center text-center">
+                        <div class="w-full">
+                            <div class="border-2 theme-accent-border p-4 mb-4">
+                                <img src="${logoSrc}" alt="BAUST Crest" class="page-logo ${logoSize} object-contain mx-auto mb-2" onerror="this.onerror=null; this.src='https://placehold.co/100x100/004d26/ffffff?text=BAUST';">
+                                <h1 class="font-cinzel text-lg font-bold uppercase theme-accent-color">
+                                    BANGLADESH ARMY UNIVERSITY OF SCIENCE & TECHNOLOGY
+                                </h1>
+                                <p class="text-xs font-bold text-slate-600 uppercase">Shiromoni, Khulna</p>
+                            </div>
+
+                            <div class="bg-slate-50 p-5 rounded-md border border-slate-300 my-4 text-center">
+                                <span class="text-xs font-bold uppercase tracking-widest theme-accent-color">${docType}</span>
+                                <h2 class="text-lg font-bold text-slate-900 mt-1">${topic}</h2>
+                            </div>
+
+                            <div class="text-xs grid grid-cols-2 gap-2 text-slate-700 bg-white border border-slate-200 p-3 rounded">
+                                <p class="text-left"><strong>Course Code:</strong> ${code}</p>
+                                <p class="text-right"><strong>Course Title:</strong> ${title}</p>
+                            </div>
+                        </div>
+
+                        <div class="w-full my-auto grid grid-cols-2 gap-4 text-left">
+                            <div class="border border-slate-300 p-4 rounded-md">
+                                <h3 class="text-xs font-bold uppercase theme-accent-color mb-2">Submitted To</h3>
+                                <p class="font-bold text-xs text-slate-900">${teacherName}</p>
+                                <p class="text-xs text-slate-600">${teacherDesig}</p>
+                                <p class="text-xs text-slate-600">${teacherDept}</p>
+                            </div>
+                            <div class="border border-slate-300 p-4 rounded-md">
+                                <h3 class="text-xs font-bold uppercase theme-accent-color mb-2">Submitted By</h3>
+                                ${studentsHTML}
+                            </div>
+                        </div>
+
+                        <div class="w-full border-t border-slate-300 pt-3 text-xs text-slate-600 flex justify-between">
+                            <p>Department of ${dept}</p>
+                            <p><strong>Date:</strong> ${subDate}</p>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+    </script>
+</body>
+</html>
